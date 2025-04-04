@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Signup</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin-top: 100px;
+    }
+    input, select {
+      padding: 10px;
+      margin: 10px;
+      width: 250px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 25px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Signup</h2>
+  <input type="text" id="username" placeholder="Enter username"><br>
+  <input type="password" id="password" placeholder="Enter password"><br>
+  <select id="role">
+    <option value="student">Student</option>
+    <option value="teacher">Teacher</option>
+    <option value="admin">Admin</option>
+  </select><br>
+  <button onclick="signup()">Sign Up</button>
+
+  <p><a href="index.html">Go to Home</a></p>
+
+  <script>
+    function signup() {
+      const username = document.getElementById("username").value.toLowerCase().trim();
+      const password = document.getElementById("password").value.trim();
+      const role = document.getElementById("role").value;
+
+      fetch("http://localhost:3000/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password, role })
+      })
+      .then(res => {
+        if (!res.ok) return res.json().then(data => { throw new Error(data.message); });
+        return res.json();
+      })
+      .then(data => {
+        alert(data.message);
+        window.location.href = "login.html";
+      })
+      .catch(err => alert("❌ " + err.message));
+    }
+  </script>
+</body>
+</html>

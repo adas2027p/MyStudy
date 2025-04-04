@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz - MyStudy</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">MyStudy</div>
+      <ul class="nav-links">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="index.html">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="quiz-container">
+    <h2>Quick Quiz: HTML Basics</h2>
+    <form id="quizForm">
+      <div class="quiz-question">
+        <p>Q1: What does HTML stand for?</p>
+        <label><input type="radio" name="q1" value="a"> Hyper Text Markup Language</label><br>
+        <label><input type="radio" name="q1" value="b"> Home Tool Markup Language</label><br>
+        <label><input type="radio" name="q1" value="c"> Hyperlinks and Text Markup Language</label><br>
+      </div>
+
+      <button type="submit">Submit</button>
+      <p id="resultMsg"></p>
+    </form>
+  </main>
+
+  <script>
+    document.getElementById("quizForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const answer = document.querySelector('input[name="q1"]:checked');
+      const result = document.getElementById("resultMsg");
+      if (answer && answer.value === "a") {
+        result.textContent = "✅ Correct!";
+        result.style.color = "green";
+      } else {
+        result.textContent = "❌ Wrong. Correct answer is: Hyper Text Markup Language";
+        result.style.color = "red";
+      }
+    });
+  </script>
+</body>
+</html>

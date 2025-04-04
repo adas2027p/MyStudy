@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('images/study-bg.jpg');
+      background-size: cover;
+      background-attachment: fixed;
+      margin: 0;
+      padding: 0;
+      color: white;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      border-radius: 16px;
+      margin: 50px auto;
+      width: 80%;
+      max-width: 600px;
+    }
+
+    h2 {
+      font-size: 28px;
+      text-align: center;
+    }
+
+    a, button {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      background-color: #28a745;
+      color: white;
+      text-decoration: none;
+      text-align: center;
+      border-radius: 8px;
+    }
+
+    a:hover, button:hover {
+      background-color: #1f8034;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2 id="welcome">Welcome</h2>
+
+    <div id="student-options" style="display:none;">
+      <a href="courses.html">📽️ Watch Videos</a>
+      <a href="courses.html#pdfs">📄 Download PDFs</a>
+      <a href="quiz.html">📝 Take Quiz</a>
+    </div>
+
+    <div id="teacher-options" style="display:none;">
+      <a href="upload-video.html">📤 Upload Video</a>
+      <a href="upload-pdf.html">📤 Upload PDF</a>
+      <a href="upload-quiz.html">🧾 Upload Quiz</a>
+    </div>
+
+    <div id="admin-options" style="display:none;">
+      <a href="manage-users.html">👥 Manage Users</a>
+      <a href="edit-permissions.html">🛠️ Edit Permissions</a>
+    </div>
+
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <script>
+    window.onload = function () {
+      const username = localStorage.getItem("username");
+      const role = localStorage.getItem("role");
+
+      document.getElementById("welcome").innerText = `Welcome, ${username}!`;
+
+      if (role === "student") {
+        document.getElementById("student-options").style.display = "block";
+      } else if (role === "teacher") {
+        document.getElementById("teacher-options").style.display = "block";
+      } else if (role === "admin") {
+        document.getElementById("admin-options").style.display = "block";
+      }
+    };
+
+    function logout() {
+      localStorage.clear();
+      window.location.href = "login.html";
+    }
+  </script>
+
+</body>
+</html>
